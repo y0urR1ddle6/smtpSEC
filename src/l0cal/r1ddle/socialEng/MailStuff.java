@@ -20,10 +20,15 @@ public class MailStuff {
 
     public void sendMail(Session session,String recipient){
         // BODY & HEAD
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter email schema number: ");
         MailSchemas.MailSchema mailSchema;
-        int n = scanner.nextInt();
+        int n;
+        if(!configuration.isSpam()){
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Enter email schema number: ");
+            n = scanner.nextInt();
+        }else {
+           n = configuration.getSchemaNmb();
+        }
         try{
             mailSchema = Main.getMailSchemas().getMailSchemasList().get(n);
         }catch (Exception e){

@@ -25,8 +25,9 @@ public class Configuration {
     private static String login = "";
     @Option
     private static String password = "";
-    // @Option UNDER CONSTRUCTION
+    @Option
     public static boolean spam = false;
+    private static int schemaNmb;
 
     private static final boolean verbose = false;
     private static String emailsPath = "";
@@ -132,5 +133,13 @@ public class Configuration {
 
     public void setEmailsPath(String emailsPath) {
         Configuration.emailsPath = emailsPath;
+    }
+
+    public int getSchemaNmb() {
+        return schemaNmb;
+    }
+
+    public void setSchemaNmb(int schemaNmb) {
+        Configuration.schemaNmb = schemaNmb;
     }
 }

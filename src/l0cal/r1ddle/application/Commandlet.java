@@ -8,6 +8,8 @@ import l0cal.r1ddle.smtp.SmtpOptionsException;
 import l0cal.r1ddle.socialEng.MailStuff;
 
 import javax.mail.Session;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.lang.reflect.Field;
 import java.util.Scanner;
 
@@ -63,8 +65,10 @@ public enum Commandlet {
                 break;
             case "spam":
                 configuration.setSpam(Boolean.parseBoolean(value));
-                System.out.println("Enter emails path: ");
+                System.out.print("Enter emails file path: ");
                 configuration.setEmailsPath(scanner.nextLine());
+                System.out.print("Enter schema number: ");
+                configuration.setSchemaNmb(scanner.nextInt());
         }
 
 
@@ -76,8 +80,12 @@ public enum Commandlet {
         Session mailSession = smtpConnection.bind();
         MailStuff mailStuff = new MailStuff(configuration);
         if(configuration.isSpam()){
-            // todo
-
+            Scanner scanner = new Scanner(new FileReader(configuration.getEmailsPath()));
+            while (scanner.hasNextLine()){
+                String email = scanner.nextLine();
+                System.out.println("[+] sending mail to " + email);
+                mailStuff.sendMail(mailSession, email);
+            }
         }else {
             mailStuff.sendMail(mailSession,configuration.getEmailTo());
         }
@@ -104,7 +112,7 @@ public enum Commandlet {
         this.description = description;
     }
 
-    public void exec() throws SmtpOptionsException, SmtpConnectionException {
+    public void exec() throws SmtpOptionsException, SmtpConnectionException, FileNotFoundException {
         command.exec();
     }
 

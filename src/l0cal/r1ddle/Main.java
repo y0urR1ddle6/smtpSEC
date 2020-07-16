@@ -48,6 +48,7 @@ public class Main {
     public static void showSchemas(){
         ArrayList<MailSchemas.MailSchema> mailSchemaArrayList = mailSchemas.getMailSchemasList();
         for(MailSchemas.MailSchema mailSchema : mailSchemaArrayList){
+            System.out.println("Schema #" + mailSchemaArrayList.indexOf(mailSchema));
             System.out.println("-".repeat(70));
             System.out.println("Subject: " + mailSchema.getSubject());
             System.out.println(mailSchema.getBody());

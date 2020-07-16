@@ -3,14 +3,10 @@ package l0cal.r1ddle.application;
 import l0cal.r1ddle.smtp.SmtpConnectionException;
 import l0cal.r1ddle.smtp.SmtpOptionsException;
 
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Console {
-
-
-    public Console(){
-
-    }
 
     @SuppressWarnings("InfiniteLoopStatement")
     public void run(){
@@ -31,7 +27,7 @@ public class Console {
                found = true;
                 try {
                     commandlet.exec();
-                } catch (SmtpOptionsException | SmtpConnectionException e) {
+                } catch (SmtpOptionsException | SmtpConnectionException | FileNotFoundException e) {
                     System.out.println(e.getMessage());
                 }
                 break;
